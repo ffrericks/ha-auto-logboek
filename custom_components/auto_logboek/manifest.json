@@ -1,0 +1,13 @@
+{
+  "domain": "auto_logboek",
+  "name": "Auto logboek",
+  "after_dependencies": ["mobile_app"],
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com/ffrericks/ha-auto-logboek",
+  "issue_tracker": "https://github.com/ffrericks/ha-auto-logboek/issues",
+  "integration_type": "device",
+  "iot_class": "calculated",
+  "requirements": [],
+  "version": "0.1.0"
+}

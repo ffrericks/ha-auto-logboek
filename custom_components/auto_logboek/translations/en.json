@@ -1,0 +1,186 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add a car",
+        "description": "Pick the entities of your car integration (FordPass, Volkswagen, Tesla, OBD, etc.). Work hours, costs and notifications are set afterwards under Configure.",
+        "data": {
+          "naam": "Name of the car",
+          "brandstof_entiteit": "Fuel level (in % or L)",
+          "tankinhoud": "Tank capacity",
+          "km_entiteit": "Odometer",
+          "contact_entiteit": "Ignition / engine on",
+          "contact_uit": "Values that mean 'ignition off' (comma separated)",
+          "positie_entiteit": "Position (tracker with latitude and longitude)"
+        }
+      }
+    },
+    "error": {
+      "entity_missing": "This entity does not exist",
+      "no_off_state": "Enter at least one value",
+      "name_missing": "Enter a name"
+    },
+    "abort": {
+      "already_configured": "This car already exists"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Car logbook",
+        "menu_options": {
+          "auto": "Entities of the car",
+          "werk": "Work hours and region (work or private)",
+          "kosten": "Consumption and price",
+          "meldingen": "Notification after refuelling"
+        }
+      },
+      "auto": {
+        "title": "Entities of the car",
+        "data": {
+          "brandstof_entiteit": "Fuel level (in % or L)",
+          "tankinhoud": "Tank capacity",
+          "km_entiteit": "Odometer",
+          "contact_entiteit": "Ignition / engine on",
+          "contact_uit": "Values that mean 'ignition off' (comma separated)",
+          "positie_entiteit": "Position",
+          "positie_reserve": "Position when the car reports nothing (e.g. your phone)",
+          "prive_entiteit": "Private signal: a trip is private if this entity was on (e.g. Android Auto)"
+        }
+      },
+      "werk": {
+        "title": "Work or private",
+        "description": "A trip is work when it starts within that day's work hours, starts and ends in the region, and the private signal was not on. Write the hours as 08:00-17:00; empty = no work that day. Region = state/province as OpenStreetMap names it (e.g. Utrecht); empty = anywhere.",
+        "data": {
+          "werk_ma": "Monday",
+          "werk_di": "Tuesday",
+          "werk_wo": "Wednesday",
+          "werk_do": "Thursday",
+          "werk_vr": "Friday",
+          "werk_za": "Saturday",
+          "werk_zo": "Sunday",
+          "werk_regio": "Region (state/province)"
+        }
+      },
+      "kosten": {
+        "title": "Consumption and price",
+        "description": "The integration learns the consumption from the drop of the fuel gauge (after about 80 km). A refuel without an amount uses the price entity or the default price, marked as provisional.",
+        "data": {
+          "standaard_verbruik": "Consumption until something is learned",
+          "standaard_prijs": "Price per liter when nothing is known",
+          "prijs_entiteit": "Sensor with the current price per liter (optional)",
+          "tank_drempel": "Rise that counts as a refuel"
+        }
+      },
+      "meldingen": {
+        "title": "Notification after refuelling",
+        "data": {
+          "melden_aan": "Phone",
+          "dashboard": "Open when the notification is tapped"
+        }
+      }
+    },
+    "error": {
+      "entity_missing": "This entity does not exist",
+      "no_off_state": "Enter at least one value",
+      "bad_window": "Write it as 08:00-17:00"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "logboek": { "name": "Logbook" },
+      "brandstof_verbruikt": { "name": "Fuel used" },
+      "brandstofkosten": { "name": "Fuel cost" },
+      "tankprijs": { "name": "Price per liter in the tank" },
+      "verbruik": { "name": "Consumption" }
+    }
+  },
+  "services": {
+    "tankbeurt_bijwerken": {
+      "name": "Update refuel",
+      "description": "Fill in the amount, price per liter or other details of a refuel.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "id": { "name": "Id", "description": "Id of the refuel (t12)." },
+        "bedrag": { "name": "Amount", "description": "Total paid, e.g. 51.23." },
+        "literprijs": { "name": "Price per liter", "description": "e.g. 2.079." },
+        "liters": { "name": "Liters", "description": "Liters refuelled." },
+        "pomp": { "name": "Station", "description": "Name of the fuel station." },
+        "plaats": { "name": "Place", "description": "Place of the fuel station." },
+        "datum": { "name": "Date", "description": "yyyy-mm-dd or dd/mm/yyyy." },
+        "tijd": { "name": "Time", "description": "hh:mm." },
+        "km": { "name": "Odometer", "description": "Odometer at the refuel." },
+        "notitie": { "name": "Note", "description": "Free text." }
+      }
+    },
+    "tankbeurt_toevoegen": {
+      "name": "Add refuel",
+      "description": "Add a refuel by hand.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "datum": { "name": "Date", "description": "yyyy-mm-dd or dd/mm/yyyy; empty = now." },
+        "tijd": { "name": "Time", "description": "hh:mm." },
+        "pomp": { "name": "Station", "description": "Name of the fuel station." },
+        "plaats": { "name": "Place", "description": "Place of the fuel station." },
+        "liters": { "name": "Liters", "description": "Liters refuelled." },
+        "bedrag": { "name": "Amount", "description": "Total paid." },
+        "literprijs": { "name": "Price per liter", "description": "Price per liter." },
+        "km": { "name": "Odometer", "description": "Odometer at the refuel." },
+        "notitie": { "name": "Note", "description": "Free text." }
+      }
+    },
+    "tankbeurt_verwijderen": {
+      "name": "Remove refuel",
+      "description": "Remove a refuel.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "id": { "name": "Id", "description": "Id of the refuel." }
+      }
+    },
+    "rit_bijwerken": {
+      "name": "Update trip",
+      "description": "Set work or private by hand, or add a note.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "id": { "name": "Id", "description": "Id of the trip (r12)." },
+        "soort": { "name": "Kind", "description": "werk (work), prive (private), or auto (back to automatic)." },
+        "notitie": { "name": "Note", "description": "Free text." }
+      }
+    },
+    "rit_toevoegen": {
+      "name": "Add trip",
+      "description": "Add a trip by hand.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "datum": { "name": "Date", "description": "yyyy-mm-dd or dd/mm/yyyy." },
+        "tijd": { "name": "Departure", "description": "hh:mm." },
+        "eind_tijd": { "name": "Arrival", "description": "hh:mm." },
+        "km": { "name": "Distance", "description": "Km driven (or fill in the odometer readings)." },
+        "km_start": { "name": "Odometer start", "description": "Odometer at departure." },
+        "km_eind": { "name": "Odometer end", "description": "Odometer at arrival." },
+        "van": { "name": "From", "description": "Place of departure." },
+        "naar": { "name": "To", "description": "Destination." },
+        "van_provincie": { "name": "Province from", "description": "For the work rule." },
+        "naar_provincie": { "name": "Province to", "description": "For the work rule." },
+        "soort": { "name": "Kind", "description": "werk or prive; empty = automatic." },
+        "notitie": { "name": "Note", "description": "Free text." }
+      }
+    },
+    "rit_verwijderen": {
+      "name": "Remove trip",
+      "description": "Remove a trip.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "id": { "name": "Id", "description": "Id of the trip." }
+      }
+    },
+    "lijst": {
+      "name": "List",
+      "description": "Get trips and refuels, optionally of one month.",
+      "fields": {
+        "auto": { "name": "Car", "description": "Name or entry id; only needed with more than one car." },
+        "maand": { "name": "Month", "description": "yyyy-mm; empty = everything." }
+      }
+    }
+  }
+}

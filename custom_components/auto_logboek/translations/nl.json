@@ -1,0 +1,186 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Auto toevoegen",
+        "description": "Kies de entiteiten van je auto-integratie (FordPass, Volkswagen, Tesla, OBD, enz.). Werktijden, kosten en meldingen stel je daarna in via Configureren.",
+        "data": {
+          "naam": "Naam van de auto",
+          "brandstof_entiteit": "Brandstofniveau (in % of L)",
+          "tankinhoud": "Tankinhoud",
+          "km_entiteit": "Kilometerstand",
+          "contact_entiteit": "Contact / motor aan",
+          "contact_uit": "Waarden die 'contact uit' betekenen (komma's ertussen)",
+          "positie_entiteit": "Positie (tracker met breedte- en lengtegraad)"
+        }
+      }
+    },
+    "error": {
+      "entity_missing": "Deze entiteit bestaat niet",
+      "no_off_state": "Vul minstens één waarde in",
+      "name_missing": "Vul een naam in"
+    },
+    "abort": {
+      "already_configured": "Deze auto bestaat al"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Auto logboek",
+        "menu_options": {
+          "auto": "Entiteiten van de auto",
+          "werk": "Werktijden en regio (werk of privé)",
+          "kosten": "Verbruik en prijs",
+          "meldingen": "Melding na tanken"
+        }
+      },
+      "auto": {
+        "title": "Entiteiten van de auto",
+        "data": {
+          "brandstof_entiteit": "Brandstofniveau (in % of L)",
+          "tankinhoud": "Tankinhoud",
+          "km_entiteit": "Kilometerstand",
+          "contact_entiteit": "Contact / motor aan",
+          "contact_uit": "Waarden die 'contact uit' betekenen (komma's ertussen)",
+          "positie_entiteit": "Positie",
+          "positie_reserve": "Positie als de auto niets doorgeeft (bijv. je telefoon)",
+          "prive_entiteit": "Privé-signaal: rit is privé als deze entiteit aan was (bijv. Android Auto)"
+        }
+      },
+      "werk": {
+        "title": "Werk of privé",
+        "description": "Een rit is werk als hij binnen de werktijd van die dag begint, begint en eindigt in de regio, en het privé-signaal niet aan was. Schrijf de tijd als 08:00-17:00; leeg = die dag geen werk. Regio = provincie zoals OpenStreetMap hem noemt (bijv. Utrecht); leeg = overal.",
+        "data": {
+          "werk_ma": "Maandag",
+          "werk_di": "Dinsdag",
+          "werk_wo": "Woensdag",
+          "werk_do": "Donderdag",
+          "werk_vr": "Vrijdag",
+          "werk_za": "Zaterdag",
+          "werk_zo": "Zondag",
+          "werk_regio": "Regio (provincie)"
+        }
+      },
+      "kosten": {
+        "title": "Verbruik en prijs",
+        "description": "Het verbruik leert de integratie zelf uit de daling van de tankmeter (na zo'n 80 km). Zonder bedrag rekent een tankbeurt met de prijs-entiteit of de standaardprijs, als voorlopig.",
+        "data": {
+          "standaard_verbruik": "Verbruik zolang er niets geleerd is",
+          "standaard_prijs": "Literprijs als er niets bekend is",
+          "prijs_entiteit": "Sensor met de actuele literprijs (optioneel)",
+          "tank_drempel": "Stijging die als tankbeurt telt"
+        }
+      },
+      "meldingen": {
+        "title": "Melding na tanken",
+        "data": {
+          "melden_aan": "Telefoon",
+          "dashboard": "Openen bij tikken op de melding"
+        }
+      }
+    },
+    "error": {
+      "entity_missing": "Deze entiteit bestaat niet",
+      "no_off_state": "Vul minstens één waarde in",
+      "bad_window": "Schrijf het als 08:00-17:00"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "logboek": { "name": "Logboek" },
+      "brandstof_verbruikt": { "name": "Brandstof verbruikt" },
+      "brandstofkosten": { "name": "Brandstofkosten" },
+      "tankprijs": { "name": "Literprijs in de tank" },
+      "verbruik": { "name": "Verbruik" }
+    }
+  },
+  "services": {
+    "tankbeurt_bijwerken": {
+      "name": "Tankbeurt bijwerken",
+      "description": "Bedrag, literprijs of andere gegevens van een tankbeurt invullen.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "id": { "name": "Id", "description": "Id van de tankbeurt (t12)." },
+        "bedrag": { "name": "Bedrag", "description": "Totaal betaald, bijv. 51,23." },
+        "literprijs": { "name": "Literprijs", "description": "Prijs per liter, bijv. 2,079." },
+        "liters": { "name": "Liters", "description": "Getankte liters." },
+        "pomp": { "name": "Pomp", "description": "Naam van het tankstation." },
+        "plaats": { "name": "Plaats", "description": "Plaats van het tankstation." },
+        "datum": { "name": "Datum", "description": "jjjj-mm-dd of dd/mm/jjjj." },
+        "tijd": { "name": "Tijd", "description": "uu:mm." },
+        "km": { "name": "Km-stand", "description": "Kilometerstand bij het tanken." },
+        "notitie": { "name": "Notitie", "description": "Vrije tekst." }
+      }
+    },
+    "tankbeurt_toevoegen": {
+      "name": "Tankbeurt toevoegen",
+      "description": "Een tankbeurt met de hand toevoegen.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "datum": { "name": "Datum", "description": "jjjj-mm-dd of dd/mm/jjjj; leeg = nu." },
+        "tijd": { "name": "Tijd", "description": "uu:mm." },
+        "pomp": { "name": "Pomp", "description": "Naam van het tankstation." },
+        "plaats": { "name": "Plaats", "description": "Plaats van het tankstation." },
+        "liters": { "name": "Liters", "description": "Getankte liters." },
+        "bedrag": { "name": "Bedrag", "description": "Totaal betaald." },
+        "literprijs": { "name": "Literprijs", "description": "Prijs per liter." },
+        "km": { "name": "Km-stand", "description": "Kilometerstand bij het tanken." },
+        "notitie": { "name": "Notitie", "description": "Vrije tekst." }
+      }
+    },
+    "tankbeurt_verwijderen": {
+      "name": "Tankbeurt verwijderen",
+      "description": "Een tankbeurt weghalen.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "id": { "name": "Id", "description": "Id van de tankbeurt." }
+      }
+    },
+    "rit_bijwerken": {
+      "name": "Rit bijwerken",
+      "description": "Werk of privé met de hand zetten, of een notitie toevoegen.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "id": { "name": "Id", "description": "Id van de rit (r12)." },
+        "soort": { "name": "Soort", "description": "werk, prive, of auto (terug naar de automatische indeling)." },
+        "notitie": { "name": "Notitie", "description": "Vrije tekst." }
+      }
+    },
+    "rit_toevoegen": {
+      "name": "Rit toevoegen",
+      "description": "Een rit met de hand toevoegen.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "datum": { "name": "Datum", "description": "jjjj-mm-dd of dd/mm/jjjj." },
+        "tijd": { "name": "Vertrek", "description": "uu:mm." },
+        "eind_tijd": { "name": "Aankomst", "description": "uu:mm." },
+        "km": { "name": "Afstand", "description": "Gereden km (of vul de km-standen in)." },
+        "km_start": { "name": "Km-stand begin", "description": "Kilometerstand bij vertrek." },
+        "km_eind": { "name": "Km-stand eind", "description": "Kilometerstand bij aankomst." },
+        "van": { "name": "Van", "description": "Vertrekplaats." },
+        "naar": { "name": "Naar", "description": "Bestemming." },
+        "van_provincie": { "name": "Provincie van", "description": "Voor de werkregel." },
+        "naar_provincie": { "name": "Provincie naar", "description": "Voor de werkregel." },
+        "soort": { "name": "Soort", "description": "werk of prive; leeg = automatisch." },
+        "notitie": { "name": "Notitie", "description": "Vrije tekst." }
+      }
+    },
+    "rit_verwijderen": {
+      "name": "Rit verwijderen",
+      "description": "Een rit weghalen.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "id": { "name": "Id", "description": "Id van de rit." }
+      }
+    },
+    "lijst": {
+      "name": "Lijst",
+      "description": "Ritten en tankbeurten opvragen, eventueel van één maand.",
+      "fields": {
+        "auto": { "name": "Auto", "description": "Naam of entry-id; alleen nodig bij meer auto's." },
+        "maand": { "name": "Maand", "description": "jjjj-mm; leeg = alles." }
+      }
+    }
+  }
+}

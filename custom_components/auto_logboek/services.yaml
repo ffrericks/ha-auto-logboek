@@ -1,0 +1,157 @@
+tankbeurt_bijwerken:
+  fields:
+    auto:
+      selector:
+        text:
+    id:
+      required: true
+      selector:
+        text:
+    bedrag:
+      selector:
+        text:
+    literprijs:
+      selector:
+        text:
+    liters:
+      selector:
+        text:
+    pomp:
+      selector:
+        text:
+    plaats:
+      selector:
+        text:
+    datum:
+      selector:
+        text:
+    tijd:
+      selector:
+        text:
+    km:
+      selector:
+        text:
+    notitie:
+      selector:
+        text:
+tankbeurt_toevoegen:
+  fields:
+    auto:
+      selector:
+        text:
+    datum:
+      selector:
+        text:
+    tijd:
+      selector:
+        text:
+    pomp:
+      selector:
+        text:
+    plaats:
+      selector:
+        text:
+    liters:
+      selector:
+        text:
+    bedrag:
+      selector:
+        text:
+    literprijs:
+      selector:
+        text:
+    km:
+      selector:
+        text:
+    notitie:
+      selector:
+        text:
+tankbeurt_verwijderen:
+  fields:
+    auto:
+      selector:
+        text:
+    id:
+      required: true
+      selector:
+        text:
+rit_bijwerken:
+  fields:
+    auto:
+      selector:
+        text:
+    id:
+      required: true
+      selector:
+        text:
+    soort:
+      selector:
+        select:
+          options:
+            - werk
+            - prive
+            - auto
+    notitie:
+      selector:
+        text:
+rit_toevoegen:
+  fields:
+    auto:
+      selector:
+        text:
+    datum:
+      selector:
+        text:
+    tijd:
+      selector:
+        text:
+    eind_tijd:
+      selector:
+        text:
+    km:
+      selector:
+        text:
+    km_start:
+      selector:
+        text:
+    km_eind:
+      selector:
+        text:
+    van:
+      selector:
+        text:
+    naar:
+      selector:
+        text:
+    van_provincie:
+      selector:
+        text:
+    naar_provincie:
+      selector:
+        text:
+    soort:
+      selector:
+        select:
+          options:
+            - werk
+            - prive
+    notitie:
+      selector:
+        text:
+rit_verwijderen:
+  fields:
+    auto:
+      selector:
+        text:
+    id:
+      required: true
+      selector:
+        text:
+lijst:
+  fields:
+    auto:
+      selector:
+        text:
+    maand:
+      selector:
+        text:
